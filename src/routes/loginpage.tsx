@@ -2,18 +2,22 @@
 
 import React, { useState } from "react";
 import { Button, TextField, Typography, Container } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { authorizeUser } from "../store/apis";
+import { AppDispatch } from "../store";
+
+
 
 const LoginPage: React.FC = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
-  const handleLogin = () => {
-    console.log(
-      "Logging in with username:",
-      username,
-      "and password:",
-      password
-    );
+  const dispatch: AppDispatch = useDispatch();
+
+  const handleLogin = async () => {
+    const response = await dispatch(authorizeUser({ username, password })) ;
+
+    console.log(response)
   };
 
   return (

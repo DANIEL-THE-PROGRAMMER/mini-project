@@ -1,17 +1,29 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
 
+interface Credentials {
+  username: string;
+  password: string;
+}
+
 export const authorizeUser = createAsyncThunk(
   "auth/authorizeUser",
-  async (
-    credentials: { username: string; password: string },
-    { rejectWithValue }
-  ) => {
+  async (credentials: Credentials, { rejectWithValue }) => {
     try {
+      const formData = new URLSearchParams();
+      formData.append("username", credentials.username);
+      formData.append("password", credentials.password);
+
       const response = await axios.post(
         "https://gps.autotracker.group/api/session",
-        credentials
+        formData, 
+        {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        }
       );
+
       if (response.status === 200) {
         return true;
       }
