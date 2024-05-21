@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
 
 interface Credentials {
-  username: string;
+  email: string;
   password: string;
 }
 
@@ -10,22 +10,36 @@ export const authorizeUser = createAsyncThunk(
   "auth/authorizeUser",
   async (credentials: Credentials, { rejectWithValue }) => {
     try {
+      const headers = new Headers();
+      headers.set(
+        "Authorization",
+        "Basic" + btoa(`${credentials.email}:${credentials.password}`)
+      );
+      headers.set("Content-Type", "application/x-www-form-urlencoded");
       const formData = new URLSearchParams();
-      formData.append("username", credentials.username);
+      formData.append("email", credentials.email);
       formData.append("password", credentials.password);
 
-      const response = await axios.post(
+      /*const response = await axios.post(
         "https://gps.autotracker.group/api/session",
-        formData, 
+        formData,
         {
           headers: {
+            Authorization:
+              "Basic" + btoa(`${credentials.email}:${credentials.password}`),
             "Content-Type": "application/x-www-form-urlencoded",
           },
         }
-      );
+      );*/
 
-      if (response.status === 200) {
-        return true;
+      const response = await fetch("https://gps.autotracker.group/api/session",{
+        method:"POST",
+        headers:headers,
+        body:formData
+      });
+
+      if (response.ok) {
+        return response.json();
       }
     } catch (error) {
       const err = error as AxiosError;

@@ -9,13 +9,13 @@ import { AppDispatch } from "../store";
 
 
 const LoginPage: React.FC = () => {
-  const [username, setUsername] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
   const dispatch: AppDispatch = useDispatch();
 
   const handleLogin = async () => {
-    const response = await dispatch(authorizeUser({ username, password })) ;
+    const response = await dispatch(authorizeUser({ email, password })); 
 
     console.log(response)
   };
@@ -26,12 +26,13 @@ const LoginPage: React.FC = () => {
         <Typography variant="h4">Login</Typography>
         <form>
           <TextField
-            label="Username"
+            label="Email"
             variant="outlined"
+            type="email"
             fullWidth
             margin="normal"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
             label="Password"
