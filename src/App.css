@@ -23,3 +23,38 @@
 .rightside {
   flex-grow:1;
 }
+
+.navbar a{
+  text-decoration: none;
+  padding: 0 12px;
+  display: block;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  color: black;
+}
+
+.navbar a.active{
+  display: green;
+  border-bottom: 5px solid lightgreen;
+  color: lightgreen;
+}
+
+.css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root{
+  height: 30px !important;
+}
+
+.css-1ygcj2i-MuiTableCell-root{
+  padding: 10px !important;
+  background-color: #f5f1f1;
+  border-bottom: 4px solid lightgreen !important;
+}
+
+.css-hbtnrh-MuiTableCell-root{
+background-color: #f5f1f1;
+border-bottom: 4px solid lightgreen !important;
+}
+
+.css-1q1u3t4-MuiTableRow-root > *:not(:last-child){
+  border-right: 1px solid rgba(224, 224, 224, 1);
+}

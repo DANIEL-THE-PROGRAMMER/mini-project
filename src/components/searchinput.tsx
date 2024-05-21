@@ -7,7 +7,13 @@ interface SearchInputProps {
   placeholder?: string;
 }
 
+
+
 const SearchInput: React.FC<SearchInputProps> = ({ placeholder }) => {
+
+    
+    
+    
   return (
     <TextField
       variant="outlined"

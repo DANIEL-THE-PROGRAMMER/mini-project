@@ -10,8 +10,44 @@ import {
   Checkbox,
 } from "@mui/material";
 import SearchInput from "../components/searchinput";
+import { AppDispatch } from "../store";
+import { useDispatch } from "react-redux";
+import { fetchData } from "../store/apis";
+import {  useEffect } from "react";
+
+
 
 export default function Home() {
+  //const [data, setData] = useState([])
+
+  const dispatch: AppDispatch = useDispatch();
+
+  useEffect(() => {
+    async function getData() {
+      const response = await dispatch(fetchData());
+
+      console.log(response);
+    }
+    getData();
+  });
+
+  /*
+Поиск 
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
+
   return (
     <>
       <Box>
@@ -20,15 +56,18 @@ export default function Home() {
             minHeight: "70px",
             boxShadow: "0 4px 2px -2px rgba(0, 0, 0, 0.1); ",
             padding: "10px",
+            display: "flex",
+            alignItems: "center",
           }}
         >
           <SearchInput />
         </Box>
-        <Box sx={{
-            padding:"10px",
-
-        }}>
-            <MyTable />
+        <Box
+          sx={{
+            padding: "10px",
+          }}
+        >
+          <MyTable />
         </Box>
       </Box>
     </>
@@ -94,17 +133,17 @@ const MyTable = () => {
             <TableCell padding="checkbox">
               <Checkbox />
             </TableCell>
+            <TableCell>Объекты </TableCell>
+            <TableCell>Группы </TableCell>
+            <TableCell>Действия </TableCell>
+            <TableCell>Иконка</TableCell>
+            <TableCell>Фотография </TableCell>
+            <TableCell>Имя</TableCell>
+            <TableCell>Создатель </TableCell>
+            <TableCell>Учетны записи</TableCell>
+            <TableCell>Категория </TableCell>
+            <TableCell>Тип Объекта </TableCell>
             <TableCell>ID</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Unique ID</TableCell>
-            <TableCell>Status</TableCell>
-            <TableCell>Last Update</TableCell>
-            <TableCell>Position ID</TableCell>
-            <TableCell>Group ID</TableCell>
-            <TableCell>Phone</TableCell>
-            <TableCell>Model</TableCell>
-            <TableCell>Contact</TableCell>
-            <TableCell>Category</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
