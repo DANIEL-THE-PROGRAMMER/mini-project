@@ -29,24 +29,9 @@ export default function Home() {
       console.log(response);
     }
     getData();
-  });
-
-  /*
-Поиск 
+  },);
 
 
-
-
-
-
-
-
-
-
-
-
-
-*/
 
   return (
     <>
@@ -147,8 +132,8 @@ const MyTable = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
+          {rows.map((row, index) => (
+            <TableRow key={index}>
               <TableCell padding="checkbox">
                 <Checkbox />
               </TableCell>
