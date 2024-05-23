@@ -6,19 +6,24 @@ import { useDispatch } from "react-redux";
 import { authorizeUser } from "../store/apis";
 import { AppDispatch } from "../store";
 
-
-
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
+  const authString = localStorage.getItem("auth");
+  const auth = authString ? JSON.parse(authString) : { authenticated: false };
+
   const dispatch: AppDispatch = useDispatch();
 
   const handleLogin = async () => {
-    const response = await dispatch(authorizeUser({ email, password })); 
-
-    console.log(response)
+    await dispatch(authorizeUser({ email, password }));
+    window.location.href = "/";
   };
+
+  if (auth.authenticated) {
+    window.location.href = "/";
+    return;
+  }
 
   return (
     <Container maxWidth="xs">

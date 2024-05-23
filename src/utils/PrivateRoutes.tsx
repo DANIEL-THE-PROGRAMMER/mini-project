@@ -1,11 +1,12 @@
 import { Outlet, Navigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { selectIsAuthenticated } from "../store/reducer/authSlice";
 
 const PrivateRoutes = () => {
-    const isAuthenticated = useSelector(selectIsAuthenticated);
+  const authString = localStorage.getItem("auth");
+  const auth = authString ? JSON.parse(authString) : { authenticated: false };
+
   
-  return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
+
+  return auth.authenticated ? <Outlet /> : <Navigate to="/login" />;
 };
 
 export default PrivateRoutes;

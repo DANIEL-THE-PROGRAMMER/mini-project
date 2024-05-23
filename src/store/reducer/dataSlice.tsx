@@ -1,20 +1,29 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchData, postData, deleteData } from "../apis";
 
-interface Device {
+interface datas {
+  uniqueId: number;
+  status: boolean;
+  lastupdate: string ;
+  positionId: string ;
+  groupId: string;
+  phone: number;
+  model: string ;
+  contact: string;
+  category: string ;
   id: string;
   name: string;
 }
 
-interface DataState {
-  devices: Device[];
+export interface DataState {
+  datas: datas[];
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
 }
 
 
 const initialState: DataState = {
-  devices: [],
+  datas: [],
   status: "idle",
   error: null,
 };
@@ -30,21 +39,25 @@ const dataSlice = createSlice({
       })
       .addCase(fetchData.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.devices = action.payload;
+        state.datas = action.payload;
       })
       .addCase(fetchData.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload as string;
       })
       .addCase(postData.fulfilled, (state, action) => {
-        state.devices.push(action.payload);
+        state.datas.push(action.payload);
       })
       .addCase(deleteData.fulfilled, (state, action) => {
-        state.devices = state.devices.filter(
+        state.datas = state.datas.filter(
           (device) => device.id !== action.payload
         );
       });
   },
 });
+
+
+export const SelectDatas = (state: DataState) => state.datas;
+
 
 export default dataSlice.reducer;

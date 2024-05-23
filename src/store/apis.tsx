@@ -6,27 +6,32 @@ interface Credentials {
   password: string;
 }
 
+const user = import.meta.env.VITE_USER
+const password = import.meta.env.VITE_PASSWORD;
+
+
 export const authorizeUser = createAsyncThunk(
   "auth/authorizeUser",
   async (credentials: Credentials, { rejectWithValue }) => {
     try {
       const headers = new Headers();
-     
+
       headers.set("Content-Type", "application/x-www-form-urlencoded");
       const formData = new URLSearchParams();
       formData.append("email", credentials.email);
       formData.append("password", credentials.password);
 
-
-      const response = await fetch("https://gps.autotracker.group/api/session",{
-        method:"POST",
-        headers:headers,
-        body:formData
-      });
+      const response = await fetch(
+        "https://gps.autotracker.group/api/session",
+        {
+          method: "POST",
+          headers: headers,
+          body: formData,
+        }
+      );
 
       if (response.ok) {
         return response.json();
-
       }
     } catch (error) {
       const err = error as AxiosError;
@@ -54,7 +59,7 @@ export const postData = createAsyncThunk(
     try {
       const response = await axios.post(
         "https://gps.autotracker.group/api/devices",
-        data
+        data,
       );
       return response.data;
     } catch (error) {
@@ -69,10 +74,12 @@ export const fetchData = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        "/devices",{
-          headers:{
-            "Content-Type":"application/json"
-          }
+        "https://gps.autotracker.group/api/devices/",
+        {
+          headers: {
+            Authorization: "Basic " + btoa(`${user}:${password}`),
+            "Content-Type": "application/json",
+          },
         }
       );
       return response.data;

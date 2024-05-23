@@ -25,7 +25,7 @@ export const Nav = () => {
         >
           <NavLink to="/Учетны записи"> Учетны записи </NavLink>
           <NavLink to="/Пользователи"> Пользователи</NavLink>
-          <NavLink to="/"> Объекты </NavLink>
+          <NavLink to="/Объекты"> Объекты </NavLink>
           <NavLink to="/Водители"> Водители </NavLink>
           <NavLink to="/Уведомление"> Уведомление </NavLink>
           <NavLink

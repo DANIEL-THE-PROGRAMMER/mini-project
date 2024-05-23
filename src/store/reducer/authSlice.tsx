@@ -22,7 +22,11 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(authorizeUser.fulfilled, (state) => {
+      localStorage.setItem("auth",JSON.stringify({
+        authenticated: true
+      }))
       state.isAuthenticated = true;
+
     });
   },
 });

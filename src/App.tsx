@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import PrivateRoutes from "./utils/PrivateRoutes";
 import Home from "./routes/home";
 import Layout from "./layout";
+import Objects from "./routes/Objects";
 
 function App() {
   return (
@@ -13,10 +14,12 @@ function App() {
       <Provider store={store}>
         <Router>
           <Routes>
-            <Route element={<PrivateRoutes />}></Route>
             <Route element={<LoginPage />} path="/login" />
-            <Route element={<Layout />}>
-              <Route element={<Home />} path="/" />
+            <Route element={<PrivateRoutes />}>
+              <Route element={<Layout />}>
+                <Route element={<Home />} path="/" />
+                <Route element={<Objects />} path="/Объекты" />
+              </Route>
             </Route>
           </Routes>
         </Router>
