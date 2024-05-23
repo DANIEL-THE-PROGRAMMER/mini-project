@@ -15,20 +15,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchData } from "../store/apis";
 import { useEffect } from "react";
 import { SelectDatas } from "../store/reducer/dataSlice";
-import { DataState } from "../store/reducer/dataSlice";
 
 export default function Objects() {
-  const dispatch: AppDispatch = useDispatch();
-
-  const Datas = useSelector(SelectDatas);
-
-  useEffect(() => {
-    async function getData() {
-      await dispatch(fetchData());
-    }
-    getData();
-  }, []);
-
   return (
     <>
       <Box>
@@ -48,15 +36,23 @@ export default function Objects() {
             padding: "10px",
           }}
         >
-          <MyTable datas={Datas} status={"loading"} error={null} />
+          <MyTable />
         </Box>
       </Box>
     </>
   );
 }
 
-const MyTable = ({ datas }: DataState) => {
- 
+const MyTable = () => {
+  const dispatch: AppDispatch = useDispatch();
+  const Datas = useSelector(SelectDatas);
+
+  useEffect(() => {
+    async function getData() {
+      await dispatch(fetchData());
+    }
+    getData();
+  }, []);
 
   return (
     <TableContainer component={Paper}>
@@ -80,7 +76,7 @@ const MyTable = ({ datas }: DataState) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {datas.datas?.map((row, index) => (
+          {Datas?.datas?.map((row, index) => (
             <TableRow key={index}>
               <TableCell padding="checkbox">
                 <Checkbox />
