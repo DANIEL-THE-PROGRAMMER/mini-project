@@ -1,30 +1,48 @@
-# React + TypeScript + Vite
+# React Project with Material UI and Rest Api
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Getting Started
 
-Currently, two official plugins are available:
+### Prerequisites
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Before running this project, ensure you have Node.js and npm installed on your local machine.
 
-## Expanding the ESLint configuration
+### Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+1. Clone this repository to your local machine:
 
-- Configure the top-level `parserOptions` property like this:
+   ```bash
+   git clone https://github.com/DANIEL-THE-PROGRAMMER/mini-project
+   ```
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+2. Navigate to the project directory:
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+3. Install dependencies: npm install
+
+### Running the Development Server
+
+To run the development server and start the application locally, run the following command:npm run dev
+
+This will start the development server and open the application in your default web browser. You can access it at [http://localhost:3000](http://localhost:3000).
+
+### Setting Environment Variables
+
+This project requires the environment variables `VITE_USER` and `VITE_PASSWORD` to be set for authentication purposes. Follow the steps below to set them:
+
+1. Create a `.env` file in the root directory of the project.
+
+2. Add the following lines to the `.env` file:
+
+VITE_USER=your-username
+VITE_PASSWORD=your-password
+
+Replace `your-username` and `your-password` with your actual credentials.
+
+### Building for Production
+
+To build the project for production, run:
+
+This will generate a production-ready build of the application in the `dist` directory.
+
+## Additional Information
+
+For more information about Vite, please refer to the [official documentation](https://vitejs.dev/).

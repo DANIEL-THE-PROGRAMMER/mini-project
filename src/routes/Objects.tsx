@@ -86,11 +86,11 @@ const MyTable = ({ datas }: DataState) => {
                 <Checkbox />
               </TableCell>
               <TableCell>{row.id}</TableCell>
-              <TableCell>{row.name}</TableCell>
+              <TableCell>{row.groupId}</TableCell>
               <TableCell>{row.uniqueId}</TableCell>
               <TableCell>{row.status}</TableCell>
               <TableCell>{row.lastupdate}</TableCell>
-              <TableCell>{row.positionId}</TableCell>
+              <TableCell>{row.name}</TableCell>
               <TableCell>{row.groupId}</TableCell>
               <TableCell>{row.phone}</TableCell>
               <TableCell>{row.model}</TableCell>
