@@ -11,7 +11,7 @@ Before running this project, ensure you have Node.js and npm installed on your l
 1. Clone this repository to your local machine:
 
    ```bash
-   git clone https://github.com/DANIEL-THE-PROGRAMMER/mini-project
+   git clone https://github.com/Daniel-TheProgrammer/mini-project
    ```
 
 2. Navigate to the project directory:
