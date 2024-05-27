@@ -1,66 +1,79 @@
-// src/components/LoginPage.tsx
-
-import React, { useState } from "react";
-import { Button, TextField, Typography, Container } from "@mui/material";
+import React from "react";
+import { Button, Typography, Container } from "@mui/material";
 import { useDispatch } from "react-redux";
+import { Formik, Form } from "formik";
+import * as Yup from "yup";
 import { authorizeUser } from "../store/apis";
 import { AppDispatch } from "../store";
+import CustomTextField from "../components/customtextfield";
 
 const LoginPage: React.FC = () => {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const dispatch: AppDispatch = useDispatch();
+
+  const initialValues = {
+    email: "",
+    password: "",
+  };
+
+  const validationSchema = Yup.object({
+    email: Yup.string().email("Invalid email address").required("Required"),
+    password: Yup.string().required("Required"),
+  });
+
+  const handleLogin = async (
+    values: typeof initialValues,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    { setSubmitting, resetForm }: any
+  ) => {
+    try {
+      await dispatch(authorizeUser(values));
+      window.location.href = "/";
+      resetForm();
+    } catch (error) {
+      //console.log(error)
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   const authString = localStorage.getItem("auth");
   const auth = authString ? JSON.parse(authString) : { authenticated: false };
 
-  const dispatch: AppDispatch = useDispatch();
-
-  const handleLogin = async () => {
-    await dispatch(authorizeUser({ email, password }));
-    window.location.href = "/";
-  };
-
   if (auth.authenticated) {
     window.location.href = "/";
-    return;
+    return null;
   }
 
   return (
     <Container maxWidth="xs">
       <div style={{ marginTop: "2rem", textAlign: "center" }}>
         <Typography variant="h4">Login</Typography>
-        <form>
-          <TextField
-            label="Email"
-            variant="outlined"
-            type="email"
-            fullWidth
-            margin="normal"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <TextField
-            label="Password"
-            type="password"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Button
-            variant="contained"
-            color="primary"
-            fullWidth
-            sx={{
-              marginTop: "20px",
-              padding: "10px",
-            }}
-            onClick={handleLogin}
-          >
-            Login
-          </Button>
-        </form>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={handleLogin}
+        >
+          {({ isSubmitting }) => (
+            <Form>
+              <CustomTextField label="Email" name="email" type="email" />
+              <CustomTextField
+                label="Password"
+                name="password"
+                type="password"
+              />
+              <Button
+                variant="contained"
+                color="primary"
+                fullWidth
+                sx={{ marginTop: "20px", padding: "10px" }}
+                type="submit"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Logging in..." : "Login"}
+              </Button>
+            </Form>
+          )}
+        </Formik>
       </div>
     </Container>
   );
