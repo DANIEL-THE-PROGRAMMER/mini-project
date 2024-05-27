@@ -4,22 +4,23 @@ import { fetchData, postData, deleteData } from "../apis";
 interface datas {
   uniqueId: number;
   status: boolean;
-  lastupdate: string;
-  positionId: string;
+  lastupdate: string ;
+  positionId: string ;
   groupId: string;
   phone: number;
-  model: string;
+  model: string ;
   contact: string;
-  category: string;
+  category: string ;
   id: string;
   name: string;
 }
 
 export interface DataState {
-  datas: datas[];
+  datas: datas[] ;
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
 }
+
 
 const initialState: DataState = {
   datas: [],
@@ -55,6 +56,10 @@ const dataSlice = createSlice({
   },
 });
 
+
 export const SelectDatas = (state: { devices: DataState }) => state.devices;
+
+
+
 
 export default dataSlice.reducer;
